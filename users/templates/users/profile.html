@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>'{{user.username}}' 님의 프로필</h2>
+<br>
+<hr>
+<h5>가입일 : {{user.date_joined|date:'Y-m-d' }}</h5>
+<hr>
+{% if request.user.pk != user.pk %}
+<h5> 팔로우 </h5>
+<form action="{% url 'users:follow' user.pk%}"method="POST">
+    {% csrf_token %}
+    {% if request.user in user.follwers.all %}
+    <button type="submit"> 언팔로우 </button>
+    {% else %}
+    <button type="submit"> 팔로우 </button>
+    {% endif %}
+</form>
+<hr>
+{% endif %}
+
+<h5>내가 등록한 물품들 </h5>
+<div class="row row-cols-1 row-cols-md-4 g-4">
+{% for UserProduct in UserProducts %}
+<div class="col" style="width: 20%;">
+    <div class="card">
+        <a href="{% url 'products:product' UserProduct.pk %}">
+            {% if UserProduc.image %}
+            <img src="{{ UserProduct.image.url }}" class="card-img-top">
+            {% else %}
+            <img src="http://placehold.it/150X150" class="card-img-top">
+            {% endif %}
+            <div class="card-body">
+                <p class="card-title" style="font-size: 15px;">{{UserProduct.title}}</p>
+            </div>
+        </a>
+    </div>
+</div>
+{% endfor %}
+</div>
+<hr>
+
+<h5>내가 찜함 물품들 </h5>
+
+<div class="row row-cols-1 row-cols-md-4 g-4">
+    {% for Userlike in Userlikes %}
+    <div class="col" style="width: 20%;">
+        <div class="card">
+            <a href="{% url 'products:product' Userlike.user_id %}">
+                {% if Userlike.image %}
+                <img src="{{ Userlike.image.url }}" class="card-img-top">
+                {% else %}
+                <img src="http://placehold.it/150X150" class="card-img-top">
+                {% endif %}
+                <div class="card-body">
+                    <p class="card-title" style="font-size: 15px;">{{Userlike.title}}</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+
+
+
+
+
+{% endblock %}

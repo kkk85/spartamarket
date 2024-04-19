@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{{products.title}}</h1>
+
+<h7>작성자 :
+    <a href="{% url 'users:profile' products.user_id %}">'{{ products.user }}'의 프로필 </a>
+</h7>
+<hr>
+<h7>작성일 : {{ products.add_date|date:'Y-m-d' }}</h7>
+{% if products.image %}
+<hr>
+<img src="{{ products.image.url }}" alt="">
+{% endif %}
+<hr>
+<div style="height: 400px;">
+    <h5>내용</h5>
+    <br>
+    <P>{{ products.content }}</P>
+</div>
+    {% if products.user_id == user.id %}
+<a href="{% url 'products:update' products.pk %}">수정</a>
+<hr>
+<form action="{% url 'products:delete' products.pk %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">삭제</button>
+</form>
+{% endif %}
+<hr>
+<a href="{% url 'index' %}"> 홈으로 가기  </a>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>SpartaMrket</h1>
+<br>
+
+<a href="{% url 'products:create'%}"> 물건 등록하기 </a>
+
+<hr>
+<div class="row row-cols-1 row-cols-md-4 g-4">
+    {% for product in products %}
+    <div class="col" >
+        <div class="card h-100" style="height: 100%">
+            <a href="{% url 'products:product' product.pk %}">
+                {% if product.image %}
+                <img src="{{ product.image.url }}" class="card-img-top" alt="{{product.image}}"
+                >
+                {% else %}
+                <img src="http://placehold.it/150X150" class="card-img-top" alt="...">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{product.title}}</h5>
+                </div>
+            </a>
+            <form action="{% url 'users:like' product.pk %}" method="POST">
+                {% csrf_token %}
+                {% if request.user in product.like_users.all %}
+                <button type="submit">찜하기 취소</button>
+                {% else %}
+                <button type="submit"> 찜하기 </button>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+    {% endfor%}
+
+ {% endblock %}

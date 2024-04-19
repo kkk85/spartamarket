@@ -1,0 +1,45 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+<h1>회원가입</h1>
+
+<form action="/accounts/signup/" method="POST">
+    <input type="hidden" name="csrfmiddlewaretoken"
+        value="6Fv6mXIQ5ohZ31HM1vj4OatizRGYX4SWBLZFRsPI3IoVBzsaOc7OugfqRG57IG96">
+    <div>
+        <label for="id_email">Email :</label>
+        <input type="email" name="email" maxlength="254" id="id_email">
+    </div>
+<br>
+    <div>
+        <label for="id_username">Username:</label>
+        <input type="text" name="username" maxlength="150" autofocus="" required="" id="id_username">
+        <span class="helptext"> 회원님의 이름(ID)를 입력하세요 </span>
+    </div>
+<br>
+    <div>
+        <label for="id_password1">Password:</label>
+        <input type="password" name="password1" autocomplete="new-password" required="" id="id_password1">
+        <span class="helptext"></span>
+<br>
+<br>
+        <label for="id_password2">Password confirmation:</label>
+        <input type="password" name="password2" autocomplete="new-password" required="" id="id_password2">
+        <span class="helptext">확인을 위해 이전과 동일한 암호를 입력하세요.</span>
+        </div>
+<br>
+    <div>
+    <ul>
+        <li>비밀번호는 다른 개인정보와 너무 비슷할 수 없습니다.</li>
+        <li>비밀번호는 8자 이상이어야 합니다.</li>
+        <li>비밀번호는 일반적으로 사용되는 비밀번호일 수 없습니다.</li>
+        <li>비밀번호가 완전히 숫자일 수는 없습니다.</li>
+    </ul>
+    <div>
+        <button type="submit">회원가입</button>
+</form>
+
+
+
+{% endblock %}
