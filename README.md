@@ -1,4 +1,4 @@
-# 스파르타 중고마켓 - 회원들을 위한 중고거래플랫폼 
+# 스파르타 중고마켓 - 회원들을 위한 중고거래플랫폼 (망했습니다)
 장고 개인 과제입니다
 
 ### 김용현
@@ -32,4 +32,6 @@
 #### users/: 사용자 페이지
 #### templates/: Django 템플릿 파일
 #### static/: CSS, 이미지 
+
+![image](https://github.com/kkk85/spartamarket/assets/24562060/cc5fbfcf-94fb-4ff7-a141-d2c343b0b057)
 
